@@ -4,12 +4,22 @@ class Model:
         self.class_names = ["positivo", "negativo", "neutro"]  # Definir as classes corretamente
 
     def predict(self, test):
-        # Simulando a predição com uma classe aleatória
         import random
-        predicted_class = random.choice(self.class_names)
-        confidence = random.uniform(0.7, 1.0)
-        probabilities = {class_name: random.uniform(0.0, 1.0) for class_name in self.class_names}
+               # Gerando valores aleatórios para as classes
+        probabilities = {
+            "positivo": random.uniform(0, 1),
+            "negativo": random.uniform(0, 1),
+            "neutro": random.uniform(0, 1)
+        }
+
+        # Encontrando a classe com o maior valor
+        predicted_class = max(probabilities, key=probabilities.get)
+        
+        # A confiança será o valor da classe prevista
+        confidence = probabilities[predicted_class]
+
         return predicted_class, confidence, probabilities
+
 
 model = Model()
 
